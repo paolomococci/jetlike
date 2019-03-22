@@ -6,7 +6,7 @@
 
     <fragment
             android:id="@+id/launcher_home"
-            android:label="Home"
+            android:label="@string/nav_graph_home"
             android:name="local.example.jetlike.StartFragment">
 
         <action android:id="@+id/end_action" app:destination="@id/end_dest" />
@@ -14,7 +14,7 @@
 
     <fragment
             android:id="@+id/end_dest"
-            android:label="End"
+            android:label="@string/nav_graph_end"
             android:name="local.example.jetlike.EndFragment">
 
     </fragment>
