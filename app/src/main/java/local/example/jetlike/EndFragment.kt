@@ -24,6 +24,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.lifecycle.Observer
 
 
 class EndFragment : Fragment() {
@@ -44,7 +46,8 @@ class EndFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(EndViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel.data.observe(this, Observer {
+            data -> view?.findViewById<TextView>(R.id.end_fragment_text_view)?.text = data
+        })
     }
-
 }
