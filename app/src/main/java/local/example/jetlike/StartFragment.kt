@@ -18,12 +18,17 @@
 
 package local.example.jetlike
 
-import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.navigation.Navigation
+import local.example.jetlike.R.layout
 
 
 class StartFragment : Fragment() {
@@ -38,13 +43,19 @@ class StartFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.start_fragment, container, false)
+        return inflater.inflate(layout.start_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProviders.of(this).get(StartViewModel::class.java)
-        // TODO: Use the ViewModel
+        viewModel.data.observe(this, Observer {
+            data -> view?.findViewById<TextView>(R.id.start_fragment_text_view)?.text = data
+        })
+        view?.findViewById<Button>(R.id.navigate_button)?.setOnClickListener {
+            view?.let {
+                Navigation.findNavController(it).navigate(R.id.end_action)
+            }
+        }
     }
-
 }
